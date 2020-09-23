@@ -1,4 +1,6 @@
 package com.prueba.Controlador;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +27,11 @@ private VistaProducto vista= new VistaProducto();
 
 	
 	//llama al DAO para obtener todos los clientes y luego los muestra en la vista
-	public void verProductos(){
+	public void ActualizarProductos(){
 		List<Producto> productos = new ArrayList<Producto>();
 		ProductoDaoImplementacion dao= new ProductoDaoImplementacion();
 		productos=dao.obtener();
-		vista.verProductos(productos);
+		vista.ActualizarProductos(productos);
 		OAuthConfig config = new OAuthConfig("http://c1830079.ferozo.com", "ck_11bf7cb735d7aa2fc586a61fcdabe812ce34a0ec", "cs_4dfc94158dd9dc187251d6cec85272925fbacb79");
 		WooCommerce wooCommerce = new WooCommerceAPI(config, ApiVersionType.V3);
 		
@@ -46,6 +48,18 @@ private VistaProducto vista= new VistaProducto();
 		}
 		
 		   
+	}
+	
+	
+	
+	
+	public void GetOrders() throws FileNotFoundException, IOException {
+		
+		ProductoDaoImplementacion dao= new ProductoDaoImplementacion();
+		boolean respuesta = dao.GetOrders();
+		vista.ExcelCreado(respuesta);
+		
+		
 	}
 	
 	
